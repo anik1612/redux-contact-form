@@ -1,19 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const ContactForm = () => {
     const { register, handleSubmit, errors } = useForm();
-    const [error, setError] = useState(false)
 
     const onSubmit = (data, e) => {
-        if (data.password === data.conPassword) {
-            setError(false)
-            fetch()
-            e.target.reset()
-        } else {
-            setError(true)
-        }
         
     };
 
@@ -55,25 +46,18 @@ const ContactForm = () => {
                             ref={register({ required: true, minLength: 6, maxLength: 12 })}
                         />
                         {errors.phNum && <p className="text-danger">* This field is required</p>}
-                        <input
+                        <textarea
                             className='form-control mb-3'
-                            type="password"
-                            placeholder="Password"
-                            name="password"
+                            type="text"
+                            placeholder="Message"
+                            rows='5'
+                            name="message"
                             ref={register({ required: true })}
                         />
                         {errors.password && <p className="text-danger">* This field is required</p>}
                         <input
-                            className='form-control mb-3'
-                            type="password"
-                            placeholder="Confirm Password"
-                            name='conPassword' ref={register({ required: true })}
-                        />
-                        {errors.conPassword && <p className="text-danger">* This field is required</p>}
-                        {error && <p className="text-danger">Your password doesn't match</p>}
-                        <input
                             type="submit"
-                            className="btn btn-primary px-5 d-block mx-auto"
+                            className="btn btn-success border rounded-pill px-5 py-3 d-block mx-auto"
                             value='Submit'
                         />
                     </form>
