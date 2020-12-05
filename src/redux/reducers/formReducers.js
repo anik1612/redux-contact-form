@@ -8,14 +8,9 @@ const formReducers = (state = initialState, action) => {
     switch (action.type) {
         case POST_FORM_DATA:
             return {
-                data: action.payload.data
+                ...state,
+                data: action.payload
             }
-
-        case GET_FORM_DATA:
-            return {
-                
-            }
-
         default:
             return state;
     }

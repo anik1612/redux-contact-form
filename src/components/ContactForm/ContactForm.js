@@ -1,11 +1,18 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+import { postFormData } from '../../redux/actions/formAction'
+import './ContactForm.css'
 
-const ContactForm = () => {
+const ContactForm = ({ postFormData }) => {
     const { register, handleSubmit, errors } = useForm();
+    let history = useHistory();
 
     const onSubmit = (data, e) => {
-        
+        postFormData(data);
+        e.target.reset()
+        history.push('/info')
     };
 
     return (
@@ -54,7 +61,7 @@ const ContactForm = () => {
                             name="message"
                             ref={register({ required: true })}
                         />
-                        {errors.password && <p className="text-danger">* This field is required</p>}
+                        {errors.message && <p className="text-danger">* This field is required</p>}
                         <input
                             type="submit"
                             className="btn btn-success border rounded-pill px-5 py-3 d-block mx-auto"
@@ -67,4 +74,4 @@ const ContactForm = () => {
     );
 };
 
-export default ContactForm;
+export default connect(null, { postFormData })(ContactForm);
