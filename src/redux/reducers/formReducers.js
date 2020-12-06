@@ -1,4 +1,4 @@
-const { POST_FORM_DATA, GET_FORM_DATA } = require("../actions/formAction")
+const { POST_FORM_DATA } = require("../actions/formAction")
 
 const initialState = {
     data: {}
