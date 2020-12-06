@@ -30,11 +30,13 @@ client.connect(err => {
             .then((result, error) => {
                 if (result.insertedCount > 0) {
                     res.json({
-                        message: 'data successfully inserted'
+                        message: 'data successfully inserted',
+                        success: true
                     })
                 } else {
                     res.json({
-                        message: error
+                        message: error,
+                        success: false
                     })
                 }
             })

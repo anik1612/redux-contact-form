@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
 import { postFormData } from '../../redux/actions/formAction'
 import './ContactForm.css'
 
@@ -13,6 +14,22 @@ const ContactForm = ({ postFormData }) => {
         postFormData(data);
         e.target.reset()
         history.push('/info')
+
+        fetch('http://localhost:5000/formData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(resData => {
+            if(resData.success){
+                swal(`${resData.message}`)
+            } else {
+                swal(`${resData.message}`)
+            }
+        })
     };
 
     return (
