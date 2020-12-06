@@ -12,9 +12,6 @@ const ContactForm = ({ postFormData }) => {
 
     const onSubmit = (data, e) => {
         postFormData(data);
-        e.target.reset()
-        history.push('/info')
-
         fetch('http://localhost:5000/formData', {
             method: 'POST',
             headers: {
@@ -22,14 +19,16 @@ const ContactForm = ({ postFormData }) => {
             },
             body: JSON.stringify(data)
         })
-        .then(res => res.json())
-        .then(resData => {
-            if(resData.success){
-                swal(`${resData.message}`)
-            } else {
-                swal(`${resData.message}`)
-            }
-        })
+            .then(res => res.json())
+            .then(resData => {
+                if (resData.success) {
+                    swal(`${resData.message}`)
+                    history.push('/info')
+                } else {
+                    swal(`${resData.message}`)
+                }
+            })
+        e.target.reset()
     };
 
     return (
