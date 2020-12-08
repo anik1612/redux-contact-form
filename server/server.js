@@ -13,7 +13,10 @@ app.use(cors());
 
 // db connection
 const uri = `${process.env.DB}`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 client.connect(err => {
     const formDataCollection = client.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION);
@@ -63,7 +66,7 @@ client.connect(err => {
 
     // db connected console log message
     console.log('db connected');
-    
+
     // listen port
     app.listen(process.env.PORT || port, () => {
         console.log('app is listening on port', port);

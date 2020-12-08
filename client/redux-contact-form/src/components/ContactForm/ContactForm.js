@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux'
@@ -14,18 +15,11 @@ const ContactForm = ({ postFormData }) => {
     const [preloader, setPreloader] = useState(false)
 
     const onSubmit = (data, e) => {
-        fetch('http://localhost:5000/formData', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
+        Axios.post('http://localhost:5000/formData', data)
             .then(resData => {
-                if (resData.success) {
+                if (resData.data.success) {
                     setPreloader(true)
-                    swal('success', `${resData.message}`, 'success')
+                    swal('success', `${resData.data.message}`, 'success')
                     postFormData(data);
                     history.push('/info');
                     setIsDisabled(true)
@@ -37,7 +31,6 @@ const ContactForm = ({ postFormData }) => {
                 swal('Error', `${error}`, 'error');
                 setIsDisabled(false)
             })
-
         setPreloader(true)
     };
 

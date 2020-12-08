@@ -1,10 +1,6 @@
 const { POST_FORM_DATA } = require("../actions/formAction")
 
-const initialState = {
-    data: {}
-}
-
-const formReducers = (state = initialState, action) => {
+const formReducers = (state = {}, action) => {
     switch (action.type) {
         case POST_FORM_DATA:
             return {

@@ -15,7 +15,6 @@ const Information = ({ data }) => {
                         <h5 className='mb-3'>Email: {data.email}</h5>
                         <h5 className='mb-3'>Phone Num: {data.phNum}</h5>
                         <h5 className='mb-3'>Message: {data.message}</h5>
-
                         <Link to='/' className='btn btn-dark text-white mt-3'>Go Back</Link>
                     </div>
                 </div>
