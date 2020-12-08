@@ -63,6 +63,7 @@ client.connect(err => {
 
     // db connected console log message
     console.log('db connected');
+    
     // listen port
     app.listen(process.env.PORT || port, () => {
         console.log('app is listening on port', port);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 import { postFormData } from '../../redux/actions/formAction'
+import Preloader from '../Preloader/Preloader';
 import './ContactForm.css'
 
 const ContactForm = ({ postFormData }) => {
@@ -41,20 +42,9 @@ const ContactForm = ({ postFormData }) => {
     };
 
     return (
-        <div>
+        <div className='contact-form-area'>
             {
-                preloader &&
-                <div className='contact-form-area d-flex justify-content-center align-items-center' style={{ height: '100vh' }}>
-                    <div className='spinner'>
-                        <div class="spinner-grow text-success mr-3" role="status">
-                        </div>
-                        <div class="spinner-grow text-danger mr-3" role="status">
-                        </div>
-                        <div class="spinner-grow text-warning" role="status">
-                        </div>
-                        <div class="visually-hidden text-center text-white font-weight-bold mt-3">Loading...</div>
-                    </div>
-                </div>
+                preloader && <Preloader />
             }
             <div className='contact-form'>
                 <div className='row d-flex justify-content-center m-0'>
