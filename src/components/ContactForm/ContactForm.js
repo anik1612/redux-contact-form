@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom';
@@ -9,9 +9,9 @@ import './ContactForm.css'
 const ContactForm = ({ postFormData }) => {
     const { register, handleSubmit, errors } = useForm();
     let history = useHistory();
+    const [isDisabled, setIsDisabled] = useState(false)
 
     const onSubmit = (data, e) => {
-        postFormData(data);
         fetch('http://localhost:5000/formData', {
             method: 'POST',
             headers: {
@@ -19,16 +19,24 @@ const ContactForm = ({ postFormData }) => {
             },
             body: JSON.stringify(data)
         })
-            .then(res => res.json())
+            .then(res => {
+                res.json()
+                console.log(res);
+            })
             .then(resData => {
                 if (resData.success) {
                     swal(`${resData.message}`)
-                    history.push('/info')
-                } else {
-                    swal(`${resData.message}`)
+                    postFormData(data);
+                    history.push('/info');
+                    setIsDisabled(true)
+                    e.target.reset()
                 }
             })
-        e.target.reset()
+            .catch(error => {
+                swal('error', `${error}`, 'error');
+                setIsDisabled(false)
+            })
+
     };
 
     return (
@@ -82,6 +90,7 @@ const ContactForm = ({ postFormData }) => {
                             type="submit"
                             className="btn btn-success border rounded-pill px-5 py-3 d-block mx-auto"
                             value='Submit'
+                            disabled={isDisabled}
                         />
                     </form>
                 </div>
