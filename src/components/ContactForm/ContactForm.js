@@ -19,10 +19,7 @@ const ContactForm = ({ postFormData }) => {
             },
             body: JSON.stringify(data)
         })
-            .then(res => {
-                res.json()
-                console.log(res);
-            })
+            .then(res => res.json())
             .then(resData => {
                 if (resData.success) {
                     swal(`${resData.message}`)
